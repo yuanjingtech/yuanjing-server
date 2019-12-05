@@ -1,0 +1,7 @@
+# Comments in GraphQL are defined with the hash (#) symbol.
+type Query {
+    test(name:String): String
+}
+type Mutation {
+    test(name:String): String
+}

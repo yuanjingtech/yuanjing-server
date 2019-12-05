@@ -1,0 +1,6 @@
+FROM node
+WORKDIR /app
+COPY . ./
+RUN yarn
+ENTRYPOINT yarn start
+EXPOSE 4000

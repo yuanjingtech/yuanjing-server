@@ -1,0 +1,35 @@
+# Comments in GraphQL are defined with the hash (#) symbol.
+
+interface Node {
+    id: ID!
+}
+input PageInput{
+    first:Int
+    after:String
+    last:Int
+    before:String
+}
+type PageInfo {
+    startCursor: String,
+    endCursor: String,
+    hasNextPage: Boolean!,
+    hasPreviousPage: Boolean!
+}
+type Viewer{
+    username: String
+    subappconnection(page:PageInput!): SubAppConnection
+}
+type SubApp implements Node{
+    id: ID!
+    name: String #名称
+    url:String #链接
+    icon_name:String
+}
+type SubAppConnection {
+    pageInfo: PageInfo!
+    edges: [SubAppEdge!]!
+}
+type SubAppEdge  {
+    cursor: String!
+    node: SubApp!
+}

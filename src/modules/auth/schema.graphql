@@ -1,0 +1,12 @@
+type AuthMutation {
+    createToken(username:String!,password:String!):String!
+}
+type Mutation {
+    auth:AuthMutation
+}
+type Viewer {
+    username:String
+}
+type Query{
+    viewer:Viewer
+}

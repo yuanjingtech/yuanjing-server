@@ -1,0 +1,48 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-typescript": "^7.7.0",
+    "@types/koa-router": "^7.0.42",
+    "@types/mongodb": "^3.3.11",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "start": "babel-node --extensions '.ts' src/index.ts",
+    "test": "babel-node --extensions '.ts' src/test.ts",
+    "check-types": "tsc"
+  },
+  "dependencies": {
+    "@graphql-modules/core": "^0.7.13",
+    "apollo-server": "^2.6.1",
+    "apollo-server-express": "^2.9.12",
+    "apollo-server-koa": "^2.9.12",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8",
+    "graphql-import-node": "^0.0.4",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-xml-body": "^2.1.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.24.0",
+    "mongodb": "^3.2.6",
+    "xml2js": "^0.4.22",
+    "xml2json": "^0.11.2"
+  },
+  "resolutions": {
+    "graphql-toolkit": "0.5.17-ddafc4c.0"
+  }
+}
