@@ -5,9 +5,6 @@
 import {subAppService} from "../services";
 
 const resolvers = {
-    SubApp: {
-        url: (it: any) => it.uri
-    },
     Viewer: {
         subappconnection: async () => {
             const appList = await subAppService.getAppList();
