@@ -1,6 +1,7 @@
+import fetch from 'node-fetch';
 class SubAppService {
     async getAppList(): Promise<Array<any>> {
-        return [
+        const apps = [
             {
                 id: 0,
                 name: 'Demo',
@@ -70,7 +71,21 @@ class SubAppService {
                 name: '仙人球调查',
                 uri: 'https://xrq360.com/',
                 icon_name: "smile-o"
-            }]
+            }];
+        const applist2 = await this.getAppListFromDaohang();
+        console.log(`${JSON.stringify(applist2)}`);
+        return apps.concat(applist2);
+    }
+
+    private async getAppListFromDaohang(): Promise<Array<any>> {
+        try {
+            const response = await fetch("http://daohang.binbinsoft.com/widget/json?name=lotosbin");
+            const appList = await response.json();
+            return appList.map((e: { Id: any; Name: any; Url: any; }) => ({id: e.Id, name: e.Name, url: e.Url}))
+        } catch (e) {
+            console.error(e);
+            return [];
+        }
     }
 }
 
