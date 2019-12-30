@@ -1,11 +1,16 @@
 import config from "./config";
 import {rootModule} from "./modules";
+import {authService} from "./modules/auth/services";
 
 const {ApolloServer} = require('apollo-server');
 
 const server = new ApolloServer({
     schema: rootModule.schema,
-    context: (session: any) => session
+    context: async (session: any) => {
+        const authorization = session.req?.headers.authorization;
+        const user = await authService.authenticate(authorization);
+        return {...session, authorization, user};
+    }
 });
 
 

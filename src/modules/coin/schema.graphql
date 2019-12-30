@@ -1,0 +1,41 @@
+interface Node {
+    id: ID!
+}
+input PageInput{
+    first:Int
+    after:String
+    last:Int
+    before:String
+}
+type PageInfo {
+    startCursor: String,
+    endCursor: String,
+    hasNextPage: Boolean!,
+    hasPreviousPage: Boolean!
+}
+type Viewer{
+    coin:Int
+    coinrecordconnection(page:PageInput!): CoinRecordConnection
+}
+type CoinRecord implements Node{
+    id: ID!
+    name: String
+    amount:Int
+}
+type CoinRecordConnection {
+    pageInfo: PageInfo!
+    edges: [CoinRecordEdge!]!
+}
+type CoinRecordEdge  {
+    cursor: String!
+    node: CoinRecord!
+}
+type Query{
+    view:Viewer
+}
+type CoinMutation {
+    create(name:String!,amount:Int!):CoinRecord
+}
+type Mutation {
+    coin: CoinMutation
+}
