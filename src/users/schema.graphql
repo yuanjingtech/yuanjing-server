@@ -1,0 +1,13 @@
+interface Node {
+    id: ID!
+}
+type User implements Node{
+    id: ID!
+    username:String
+}
+type UserMutation {
+    create(username:String!,password:String!):User
+}
+type Mutation {
+    user: UserMutation
+}

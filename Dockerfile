@@ -2,5 +2,6 @@ FROM node
 WORKDIR /app
 COPY . ./
 RUN yarn
-ENTRYPOINT yarn start
+RUN yarn build
+ENTRYPOINT yarn start:prod
 EXPOSE 4000
