@@ -5,6 +5,11 @@
  */
 
 /* tslint:disable */
+export enum ActivityOrderByInput {
+    id_asc = "id_asc",
+    id_desc = "id_desc"
+}
+
 export interface PageInput {
     first?: number;
     after?: string;
@@ -14,6 +19,30 @@ export interface PageInput {
 
 export interface Node {
     id: string;
+}
+
+export interface ActivityMutation {
+    create?: ActivityRecord;
+}
+
+export interface ActivityRecord extends Node {
+    id: string;
+    type?: string;
+    title?: string;
+    code?: string;
+    url?: string;
+    createdAt?: string;
+    expire?: string;
+}
+
+export interface ActivityRecordConnection {
+    pageInfo: PageInfo;
+    edges: ActivityRecordEdge[];
+}
+
+export interface ActivityRecordEdge {
+    cursor: string;
+    node: ActivityRecord;
 }
 
 export interface AuthMutation {
@@ -41,6 +70,7 @@ export interface CoinRecordEdge {
 }
 
 export interface IMutation {
+    activity(): ActivityMutation | Promise<ActivityMutation>;
     auth(): AuthMutation | Promise<AuthMutation>;
     coin(): CoinMutation | Promise<CoinMutation>;
     user(): UserMutation | Promise<UserMutation>;
@@ -84,6 +114,7 @@ export interface UserMutation {
 }
 
 export interface Viewer {
+    activityrecordconnection?: ActivityRecordConnection;
     username?: string;
     coin?: number;
     coinrecordconnection?: CoinRecordConnection;

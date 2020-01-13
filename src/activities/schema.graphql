@@ -1,0 +1,48 @@
+interface Node {
+    id: ID!
+}
+input PageInput{
+    first:Int
+    after:String
+    last:Int
+    before:String
+}
+type PageInfo {
+    startCursor: String,
+    endCursor: String,
+    hasNextPage: Boolean!,
+    hasPreviousPage: Boolean!
+}
+type Viewer{
+    activityrecordconnection(page:PageInput!,orderBy:ActivityOrderByInput=id_desc): ActivityRecordConnection
+}
+type ActivityRecord implements Node{
+    id: ID!
+    type: String
+    title: String
+    code: String
+    url: String
+    createdAt:String
+    expire:String
+}
+type ActivityRecordConnection {
+    pageInfo: PageInfo!
+    edges: [ActivityRecordEdge!]!
+}
+type ActivityRecordEdge  {
+    cursor: String!
+    node: ActivityRecord!
+}
+type Query{
+    viewer:Viewer
+}
+type ActivityMutation {
+    create(type:String!,title:String,code:String,url:String,expire:String):ActivityRecord
+}
+type Mutation {
+    activity: ActivityMutation
+}
+enum ActivityOrderByInput {
+    id_asc
+    id_desc
+}

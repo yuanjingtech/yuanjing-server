@@ -10,6 +10,7 @@ import {ConfigModule, ConfigService} from "@nestjs/config";
 import {MongooseModule} from "@nestjs/mongoose";
 import {CoinModule} from './coin/coin.module';
 import {AuthService} from "./auth/auth.service";
+import { ActivitiesModule } from './activities/activities.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import {AuthService} from "./auth/auth.service";
       inject: [ConfigService],
     }),
     CoinModule,
+    ActivitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
