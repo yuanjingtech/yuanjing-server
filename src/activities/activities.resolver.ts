@@ -41,6 +41,7 @@ export class ViewerResolver {
         @Args("orderBy") order: ActivityOrderByInput,
         @CurrentUser() user: User
     ) {
+        const direction = page.first != null ? 'forward' : 'backward';
         const list = await this.activityService.find({}, page);
         switch (order) {
             case ActivityOrderByInput.id_asc:
@@ -57,8 +58,8 @@ export class ViewerResolver {
             pageInfo: {
                 startCursor: start != null ? start._id.toString() : null,
                 endCursor: end != null ? end._id.toString() : null,
-                hasPreviousPage: page.after != null || (page.before != null && list.length > page.last),
-                hasNextPage: page.before != null || (page.after != null && list.length > page.first),
+                hasPreviousPage: page.after != null || (direction == 'backward' && list.length > page.last),
+                hasNextPage: page.before != null || (direction == 'forward' && list.length > page.first),
             }
         }
     }
