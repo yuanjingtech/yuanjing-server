@@ -29,13 +29,13 @@ export class ActivitiesService {
             if (page.before) {
                 query.where("_id").lt(page.before);
             }
-            query.limit(page.last)
+            query.limit(page.last + 1)
         } else if (page.first) {
             query.sort({_id: 1});
             if (page.after) {
                 query.where("_id").gt(page.after);
             }
-            query.limit(page.first)
+            query.limit(page.first + 1)
         }
         return await query.exec();
     }

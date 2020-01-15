@@ -7,6 +7,7 @@ import {GqlAuthGuard} from "../gql-auth.guard";
 import {ActivityOrderByInput, ActivityRecord, PageInput} from "../graphql";
 import {Activity} from "../interfaces/activity.interface";
 import moment = require("moment");
+import * as _ from 'lodash';
 
 @Resolver('ActivityRecord')
 export class ActivityRecordResolver {
@@ -49,7 +50,17 @@ export class ViewerResolver {
                 list.sort(((a: any, b: any) => b._id.getTimestamp() - a._id.getTimestamp()));
                 break;
         }
-        return {edges: list.map((it: any) => ({node: it}))}
+        let end = _.maxBy(list, (it: any) => it._id.getTimestamp());
+        let start = _.minBy(list, (it: any) => it._id.getTimestamp());
+        return {
+            edges: list.slice(0, page.first || page.last).map((it: any) => ({node: it})),
+            pageInfo: {
+                startCursor: start != null ? start._id.toString() : null,
+                endCursor: end != null ? end._id.toString() : null,
+                hasPreviousPage: page.after != null || (page.before != null && list.length > page.last),
+                hasNextPage: page.before != null || (page.after != null && list.length > page.first),
+            }
+        }
     }
 }
 
