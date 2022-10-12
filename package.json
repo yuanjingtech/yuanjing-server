@@ -29,7 +29,7 @@
     "@nestjs/mongoose": "^6.1.2",
     "@nestjs/passport": "^6.1.1",
     "@nestjs/platform-express": "^6.7.2",
-    "apollo-server": "^2.6.1",
+    "apollo-server": "^2.25.4",
     "apollo-server-express": "^2.9.15",
     "apollo-server-koa": "^2.9.12",
     "class-validator": "^0.11.0",
